@@ -8,6 +8,6 @@ exports.twitter = {
 };
 
 exports.spotify = {
-  id: process.env.SPOTIFY_ID,
-  secret: process.env.SPOTIFY_SECRET
+  id: process.env.2c36ec45f89e4ed9ac8be33d75281e86,
+  secret: process.env.0e98ccba4de3470ca9e14ee613265df3
 };
