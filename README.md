@@ -43,10 +43,10 @@ It should run spotify-this-song for "Immigrant song" as follows the text in rand
 
 
 ###List of commands 
-    * `my-tweets`
+    - `my-tweets`
 
-    * `spotify-this-song`
+    - `spotify-this-song`
 
-    * `movie-this`
+    - `movie-this`
 
-    * `do-what-it-says`
+    - `do-what-it-says`
