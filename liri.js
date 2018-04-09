@@ -16,7 +16,7 @@ var client = new Twitter({
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
   });
 
-console.log(keys);
+//console.log(keys);
 
 var nodeArgs = process.argv;
 var action = process.argv[2];
