@@ -5,8 +5,16 @@ var request = require('request');
 var fs = require("fs");
 var keys = require("./keys.js");
 
-var spotify = new Spotify(keys.spotify);
-var client = new Twitter(keys.twitter);
+var spotify = new Spotify({
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET
+  });
+var client = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+  });
 
 console.log(keys);
 
@@ -28,10 +36,21 @@ for (var i = 3; i < nodeArgs.length; i++) {
     }
   }
 
-/* console.log(process.env.SPOTIFY_ID=your-spotify-id);
-console.log(process.env.SPOTIFY_SECRET=your-spotify-secret);
-console.log(process.env.SPOTIFY_ID=your-spotify-id);
-console.log(process.env.SPOTIFY_ID=your-spotify-id);  */
+  var songName = "";
+for (var i = 3; i < nodeArgs.length; i++) {
+
+    if (i > 3 && i < nodeArgs.length) {
+  
+      songName = songName + "+" + nodeArgs[i];
+  
+    }
+  
+    else {
+  
+      songName += nodeArgs[i];
+  
+    }
+  }
 
 // The switch-case will direct which function gets run.
 switch (action) {
@@ -40,8 +59,12 @@ switch (action) {
         break;
 
     case "spotify-this-song":
-        spotify();
-        break;
+    if(songName) {
+        spotify(songName)
+    } else{
+        spotify("Immigrant song")
+      }
+    break;
 
     case "movie-this":
         if(movieName) {
@@ -61,8 +84,47 @@ switch (action) {
 }
 
 //twitter function 
+function tweets(){
+
+    var screenName = {screen_name: "RUclass"};
+    client.get('statuses/user_timeline', screenName, function(error, tweets, response){
+      if(!error){
+        for(var i = 0; i<tweets.length; i++){
+          var date = tweets[i].created_at;
+          console.log("@RUtestclass: " + tweets[i].text + " Created At: " + date.substring(0, 19));
+          console.log("-----------------------");
+
+        }
+      }
+      else{
+        console.log('Error occurred');
+      }
+    });
+  }
 
 //spotify function 
+function spotify(){
+    spotify.search({ type: 'track', query: songName}, function(error, data){
+        if(!error){
+          for(var i = 0; i < data.tracks.items.length; i++){
+            var songData = data.tracks.items[i];
+            //artist
+            console.log("Artist: " + songData.artists[0].name);
+            //song name
+            console.log("Song: " + songData.name);
+            //spotify preview link
+            console.log("Preview URL: " + songData.preview_url);
+            //album name
+            console.log("Album: " + songData.album.name);
+            console.log("-----------------------");
+            
+          }
+        } else{
+          console.log('Error occurred.');
+        }
+      });
+    }
+
 
 //ombd function 
 
@@ -87,9 +149,13 @@ function movie(){
    
         }
       });
-
+    }
 //do it function
 
-
-
-    }
+function doit(){
+    fs.readFile('random.txt', "utf8", function(error, data){
+      var txt = data.split(',');
+  
+      spotifySong(txt[1]);
+    });
+  }
