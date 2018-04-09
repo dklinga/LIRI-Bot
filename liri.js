@@ -22,33 +22,21 @@ var nodeArgs = process.argv;
 var action = process.argv[2];
 var movieName = "";
 for (var i = 3; i < nodeArgs.length; i++) {
-
     if (i > 3 && i < nodeArgs.length) {
-  
       movieName = movieName + "+" + nodeArgs[i];
-  
     }
-  
     else {
-  
-      movieName += nodeArgs[i];
-  
+      movieName = movieName + nodeArgs[i];
     }
   }
 
-  var songName = "";
+var songName = "";
 for (var i = 3; i < nodeArgs.length; i++) {
-
     if (i > 3 && i < nodeArgs.length) {
-  
       songName = songName + "+" + nodeArgs[i];
-  
     }
-  
     else {
-  
-      songName += nodeArgs[i];
-  
+      songName = songName + nodeArgs[i];
     }
   }
 
