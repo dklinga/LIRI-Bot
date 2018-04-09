@@ -42,7 +42,7 @@ If the user doesn't type a movie in, the program will output data for the movie 
 It should run spotify-this-song for "Immigrant song" as follows the text in random.txt.
 
 ### You need to have spotify and twitter account for LIRI-Bot to work
-Run npm install at the folder location to install dependencies
+Run npm install to install dependencies
 
 - Create developer keys for your spotify and twitter accounts
 
