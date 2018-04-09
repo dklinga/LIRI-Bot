@@ -48,9 +48,9 @@ switch (action) {
 
     case "spotify-this-song":
     if(songName) {
-        spotify(songName)
+        spotifyThis(songName)
     } else{
-        spotify("Immigrant song")
+        spotifyThis("Immigrant song")
       }
     break;
 
@@ -91,7 +91,7 @@ function tweets(){
   }
 
 //spotify function 
-function spotify(){
+function spotifyThis(){
     spotify.search({ type: 'track', query: songName}, function(error, data){
         if(!error){
           for(var i = 0; i < data.tracks.items.length; i++){
@@ -144,6 +144,6 @@ function doit(){
     fs.readFile('random.txt', "utf8", function(error, data){
       var txt = data.split(',');
   
-      spotifySong(txt[1]);
+      spotifyThis(txt[1]);
     });
   }
